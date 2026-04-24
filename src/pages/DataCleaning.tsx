@@ -316,14 +316,14 @@ export default function DataCleaning() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6">
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+    <div className="max-w-7xl mx-auto space-y-8 px-4">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {/* Left Panel */}
         <aside className="lg:col-span-1">
-          <div className="bg-white p-6 rounded-3xl border border-[#E5E5E7] shadow-sm flex flex-col h-full min-h-[500px]">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-[#86868B] mb-6">处理步骤</h2>
+          <div className="bg-white p-8 rounded-[2rem] border border-[#E5E5E7] shadow-sm flex flex-col h-full min-h-[600px]">
+            <h2 className="text-sm font-black uppercase tracking-[0.2em] text-[#86868B] mb-8">处理步骤</h2>
             
-            <div className="space-y-6 flex-1">
+            <div className="space-y-8 flex-1">
               {STEPS.map((step, idx) => {
                 const isActive = activeStep === step.id;
                 const isCompleted = activeStep > step.id;
@@ -335,51 +335,51 @@ export default function DataCleaning() {
                       setActiveStep(step.id);
                     }}
                     className={cn(
-                      "relative pl-8 cursor-pointer transition-all group",
+                      "relative pl-10 cursor-pointer transition-all group",
                       isActive ? "opacity-100" : "opacity-40 hover:opacity-100"
                     )}
                   >
                     {idx !== STEPS.length - 1 && (
                       <div className={cn(
-                        "absolute left-[9px] top-6 bottom-[-24px] w-0.5 transition-colors",
+                        "absolute left-[11px] top-8 bottom-[-32px] w-0.5 transition-colors",
                         isCompleted ? "bg-[#007AFF]" : "bg-gray-100"
                       )} />
                     )}
                     <div className={cn(
-                      "absolute left-0 top-1 w-5 h-5 rounded-full border-2 bg-white flex items-center justify-center transition-all z-10",
-                      isActive ? "border-[#007AFF] ring-4 ring-blue-50" : isCompleted ? "border-[#007AFF] bg-[#007AFF]" : "border-gray-200"
+                      "absolute left-0 top-1 w-6 h-6 rounded-full border-2 bg-white flex items-center justify-center transition-all z-10",
+                      isActive ? "border-[#007AFF] ring-8 ring-blue-50" : isCompleted ? "border-[#007AFF] bg-[#007AFF]" : "border-gray-200"
                     )}>
-                      {isCompleted && <CheckCircle2 size={12} className="text-white" />}
+                      {isCompleted && <CheckCircle2 size={14} className="text-white" />}
                     </div>
                     <div>
-                      <h3 className={cn("text-sm font-semibold mb-1", isActive && "text-[#007AFF]")}>{step.title}</h3>
-                      {isActive && <p className="text-[10px] text-[#86868B] leading-relaxed">{step.desc}</p>}
+                      <h3 className={cn("text-base font-bold mb-1.5 transition-colors", isActive && "text-[#007AFF]")}>{step.title}</h3>
+                      {isActive && <p className="text-xs text-[#86868B] leading-relaxed font-medium">{step.desc}</p>}
                     </div>
                   </div>
                 );
               })}
             </div>
 
-            <div className="mt-8 space-y-4">
-              <div className="p-4 bg-gray-50 rounded-2xl space-y-2">
-                <div className="flex items-center gap-2 text-[#1D1D1F] text-xs font-bold mb-2 pb-2 border-b border-gray-200">
-                  <Info size={14} className="text-[#007AFF]" />
+            <div className="mt-12 space-y-6">
+              <div className="p-6 bg-gray-50 rounded-[1.5rem] space-y-4">
+                <div className="flex items-center gap-3 text-[#1D1D1F] text-sm font-black mb-4 pb-4 border-b border-gray-200 uppercase tracking-wider">
+                  <Info size={18} className="text-[#007AFF]" />
                   数据洞察总览
                 </div>
-                <div className="space-y-1.5">
-                  <div className="flex justify-between text-[11px]">
+                <div className="space-y-3">
+                  <div className="flex justify-between text-xs font-bold">
                     <span className="text-[#86868B]">检测出异常点:</span>
-                    <span className="font-bold text-red-500">{totalAnomalies}</span>
+                    <span className="text-red-500 bg-red-50 px-2 py-0.5 rounded-md">{totalAnomalies}</span>
                   </div>
-                  <div className="flex justify-between text-[11px]">
+                  <div className="flex justify-between text-xs font-bold">
                     <span className="text-[#86868B]">数据缺失统计:</span>
-                    <span className="font-bold text-orange-500">{totalMissing}</span>
+                    <span className="text-orange-500 bg-orange-50 px-2 py-0.5 rounded-md">{totalMissing}</span>
                   </div>
                   {activeStep >= 2 && (
-                    <div className="flex justify-between text-[11px] pt-1">
+                    <div className="flex justify-between text-xs font-bold pt-2">
                       <span className="text-[#86868B]">插补修复状态:</span>
-                      <span className="font-bold text-green-500 flex items-center gap-1">
-                        100% 成功
+                      <span className="text-green-500 flex items-center gap-1.5">
+                        <CheckCircle2 size={14} /> 100% 成功
                       </span>
                     </div>
                   )}
@@ -389,112 +389,119 @@ export default function DataCleaning() {
               <button 
                 onClick={() => setIsPlaying(!isPlaying)}
                 className={cn(
-                  "w-full py-3.5 rounded-2xl flex items-center justify-center gap-2 text-sm font-bold transition-all active:scale-[0.98]",
+                  "w-full py-4.5 rounded-2xl flex items-center justify-center gap-2 text-base font-black transition-all active:scale-[0.96] shadow-xl",
                   isPlaying 
-                    ? "bg-red-50 text-red-500 hover:bg-red-100" 
-                    : "bg-[#007AFF] text-white shadow-lg shadow-blue-500/20 hover:bg-[#0066CC]"
+                    ? "bg-red-50 text-red-500 border border-red-100 hover:bg-red-100 shadow-red-500/10" 
+                    : "bg-[#007AFF] text-white shadow-[#007AFF]/20 hover:bg-[#0066CC] border border-[#007AFF]"
                 )}
               >
-                {isPlaying ? <Square size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" />}
-                {isPlaying ? "停止演示" : "开始测试"}
+                {isPlaying ? <Square size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" />}
+                {isPlaying ? "停止演示" : "开始仿真测试"}
               </button>
             </div>
           </div>
         </aside>
 
         {/* Main Content */}
-        <main className="lg:col-span-3 bg-white p-8 rounded-[2rem] border border-[#E5E5E7] shadow-sm flex flex-col min-h-[600px]">
-          <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-            <div className="flex items-center gap-4">
-              <div className="p-2.5 bg-blue-50 text-[#007AFF] rounded-xl">
-                <Activity size={24} />
+        <main className="lg:col-span-3 bg-white p-10 rounded-[2.5rem] border border-[#E5E5E7] shadow-sm flex flex-col min-h-[700px]">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
+            <div className="flex items-center gap-6">
+              <div className="p-4 bg-blue-50 text-[#007AFF] rounded-2xl border border-blue-100 shadow-inner">
+                <Activity size={32} />
               </div>
-              <div className="flex items-center gap-3">
-                <h2 className="text-lg font-semibold tracking-tight">传感器综合数据趋势</h2>
-                <div className="flex items-center gap-2">
+              <div className="flex flex-col gap-1.5">
+                <h2 className="text-2xl font-black text-[#1D1D1F] tracking-tight">传感器综合数据趋势</h2>
+                <div className="flex items-center gap-3">
                    {activeStep >= 1 && (
-                     <span className="flex items-center gap-1 text-[10px] font-bold text-red-500 uppercase bg-red-50 px-2 py-0.5 rounded-md">
-                        <AlertCircle size={10} /> 异常检测激活
+                     <span className="flex items-center gap-1.5 text-[11px] font-black text-red-500 uppercase bg-red-50 px-3 py-1 rounded-lg border border-red-100">
+                        <AlertCircle size={12} /> 异常检测激活
                      </span>
                    )}
                    {activeStep >= 2 && (
-                     <span className="text-[10px] font-bold text-yellow-600 uppercase bg-yellow-50 px-2 py-0.5 rounded-md">
-                        智能插补
+                     <span className="text-[11px] font-black text-yellow-600 uppercase bg-yellow-50 px-3 py-1 rounded-lg border border-yellow-100">
+                        智能线性插补
+                     </span>
+                   )}
+                   {activeStep >= 3 && (
+                     <span className="text-[11px] font-black text-[#007AFF] uppercase bg-blue-50 px-3 py-1 rounded-lg border border-blue-100">
+                        滑模滤波执行中
                      </span>
                    )}
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center bg-[#F5F5F7] p-1 rounded-xl">
+            <div className="flex items-center bg-[#F5F5F7] p-1.5 rounded-2xl border border-[#E5E5E7]">
               <button 
                 onClick={() => setViewMode('chart')}
                 className={cn(
-                  "p-2 rounded-lg transition-all",
-                  viewMode === 'chart' ? "bg-white shadow-sm text-[#007AFF]" : "text-[#86868B] hover:text-[#1D1D1F]"
+                  "px-5 py-2.5 rounded-xl transition-all flex items-center gap-2 text-xs font-black",
+                  viewMode === 'chart' ? "bg-white shadow-md text-[#007AFF]" : "text-[#86868B] hover:text-[#1D1D1F]"
                 )}
               >
-                <LineChartIcon size={18} />
+                <LineChartIcon size={20} />
+                可视化视图
               </button>
               <button 
                 onClick={() => setViewMode('table')}
                 className={cn(
-                  "p-2 rounded-lg transition-all",
-                  viewMode === 'table' ? "bg-white shadow-sm text-[#007AFF]" : "text-[#86868B] hover:text-[#1D1D1F]"
+                  "px-5 py-2.5 rounded-xl transition-all flex items-center gap-2 text-xs font-black",
+                  viewMode === 'table' ? "bg-white shadow-md text-[#007AFF]" : "text-[#86868B] hover:text-[#1D1D1F]"
                 )}
               >
-                <TableIcon size={18} />
+                <TableIcon size={20} />
+                原始数据表
               </button>
             </div>
           </div>
 
           <div className="flex-1 overflow-hidden">
             {viewMode === 'chart' ? (
-              <div className="h-full flex flex-col gap-6">
+              <div className="h-full flex flex-col gap-8">
                 {(Object.keys(METRICS) as Array<keyof typeof METRICS>).map((key) => (
-                  <div key={key} className="flex-1 bg-white border border-[#E5E5E7] rounded-2xl p-4 relative group">
-                    <div className="absolute top-4 left-6 z-10">
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full" style={{ backgroundColor: METRICS[key].color }} />
-                        <span className="text-xs font-bold text-[#1D1D1F] uppercase tracking-wider">{METRICS[key].label} ({METRICS[key].unit})</span>
+                  <div key={key} className="flex-1 bg-white border border-[#E5E5E7] rounded-[2rem] p-6 relative group hover:border-[#007AFF]/30 transition-all shadow-sm">
+                    <div className="absolute top-6 left-8 z-10">
+                      <div className="flex items-center gap-3">
+                        <div className="w-3 h-3 rounded-full shadow-lg" style={{ backgroundColor: METRICS[key].color }} />
+                        <span className="text-sm font-black text-[#1D1D1F] uppercase tracking-[0.1em]">{METRICS[key].label} ({METRICS[key].unit})</span>
                       </div>
                     </div>
-                    <div className="h-full pt-6">
+                    <div className="h-full pt-8">
                       <Line data={getChartData(key)} options={chartOptions(key)} />
                     </div>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="h-full border border-[#E5E5E7] rounded-2xl overflow-hidden flex flex-col">
+              <div className="h-full border border-[#E5E5E7] rounded-[2rem] overflow-hidden flex flex-col shadow-inner">
                 <div className="flex-1 overflow-auto">
-                  <table className="w-full text-xs text-left border-collapse">
-                    <thead className="sticky top-0 bg-gray-50 border-b border-[#E5E5E7] z-10">
+                  <table className="w-full text-sm text-left border-collapse">
+                    <thead className="sticky top-0 bg-[#F5F5F7] border-b border-[#E5E5E7] z-10">
                       <tr>
-                        <th className="px-6 py-4 font-bold text-[#86868B] uppercase tracking-wider">时间刻</th>
+                        <th className="px-8 py-5 font-black text-[#86868B] uppercase tracking-[0.2em] text-[11px]">时间刻(Time Step)</th>
                         {Object.keys(METRICS).map(k => (
-                          <th key={k} className="px-6 py-4 font-bold text-[#86868B] uppercase tracking-wider">
-                            {METRICS[k as keyof typeof METRICS].label}
+                          <th key={k} className="px-8 py-5 font-black text-[#86868B] uppercase tracking-[0.2em] text-[11px]">
+                            {METRICS[k as keyof typeof METRICS].label} ({METRICS[k as keyof typeof METRICS].unit})
                           </th>
                         ))}
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-50">
+                    <tbody className="divide-y divide-[#F5F5F7]">
                       {rawDataset.map((raw, i) => (
-                        <tr key={i} className="hover:bg-gray-50 transition-colors">
-                          <td className="px-6 py-3 font-mono font-medium text-[#86868B]">{raw.time}</td>
+                        <tr key={i} className="hover:bg-gray-50 transition-colors group">
+                          <td className="px-8 py-4 font-mono font-bold text-[#86868B] group-hover:text-[#007AFF]">{raw.time}</td>
                           {(Object.keys(METRICS) as Array<keyof typeof METRICS>).map(k => {
                             const p = processedDataMap[k].points[i];
                             return (
-                              <td key={k} className="px-6 py-3 font-mono">
+                              <td key={k} className="px-8 py-4 font-mono">
                                 {p.isImputed && activeStep >= 2 ? (
-                                  <span className="text-yellow-600 font-bold bg-yellow-50 px-2 py-0.5 rounded-lg">{p.value}</span>
+                                  <span className="text-yellow-600 font-black bg-yellow-50 px-3 py-1 rounded-xl border border-yellow-100 shadow-sm">{p.value} <span className="text-[9px] font-medium">(CL)</span></span>
                                 ) : activeStep >= 1 && p.isAnomaly ? (
-                                  <span className="text-red-500 font-bold bg-red-50 px-2 py-0.5 rounded-lg">{p.raw}</span>
+                                  <span className="text-red-500 font-black bg-red-50 px-3 py-1 rounded-xl border border-red-100 shadow-sm">{p.raw} <span className="text-[9px] font-medium">(AN)</span></span>
                                 ) : p.raw === null ? (
-                                  <span className="text-gray-300">null</span>
+                                  <span className="text-gray-300 italic font-medium">缺失(NULL)</span>
                                 ) : (
-                                  <span className="text-[#1D1D1F]">{p.value}</span>
+                                  <span className="text-[#1D1D1F] font-bold">{p.value}</span>
                                 )}
                               </td>
                             );
@@ -510,5 +517,6 @@ export default function DataCleaning() {
         </main>
       </div>
     </div>
+
   );
 }
