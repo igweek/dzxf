@@ -15,15 +15,16 @@ type TabType = 'feed' | 'crab';
 interface FeedStage {
   name: string;
   ratio: string;
+  px2: string;
   speed: string;
   img: string;
 }
 
 const FEED_STAGES: FeedStage[] = [
-  { name: 'T=0 投喂初始', ratio: '12.58', speed: '--', img: '/1.jpg' },
-  { name: 'T=60 快速消耗', ratio: '10.66', speed: '12.4', img: '/2.jpg' },
-  { name: 'T=120 阶段判定', ratio: '5.51', speed: '6.2', img: '/3.jpg' },
-  { name: '测试结束', ratio: '0.91', speed: '10.6', img: '/4.jpg' }
+  { name: 'T=0 投喂初始', ratio: '12.58', px2: '503200', speed: '--', img: '/1.jpg' },
+  { name: 'T=60 快速消耗', ratio: '10.66', px2: '426400', speed: '21.33', img: '/2.jpg' },
+  { name: 'T=120 阶段判定', ratio: '5.51', px2: '220400', speed: '57.22', img: '/3.jpg' },
+  { name: '测试结束', ratio: '0.91', px2: '36400', speed: '51.11', img: '/4.jpg' }
 ];
 
 const TRACK_CONFIG = [
@@ -31,7 +32,7 @@ const TRACK_CONFIG = [
   { id: 4, distBase: 0.02, speedFactor: 0.04 },
   { id: 5, distBase: 0.01, speedFactor: 0.02 }, // Crab #5, very slow movement
   { id: 1, distBase: 0.05, speedFactor: 0.12 },
-  { id: 2, distBase: 0.82, speedFactor: 0.18 }
+  { id: 7, distBase: 0.82, speedFactor: 0.18 }
 ];
 
 export default function VisionModel() {
@@ -181,19 +182,19 @@ export default function VisionModel() {
                 算法原理
               </h2>
               <div className="space-y-4 text-sm text-[#86868B] leading-relaxed">
-                <p>针对投喂区遮挡问题，系统采用<strong className="text-[#1D1D1F]">分时段采样法</strong>：</p>
+                <p>系统采用<strong className="text-[#1D1D1F]">400万像素 (4MP)</strong> 固定视角相机，通过<strong className="text-[#1D1D1F]">分时段采样法</strong>进行残饵量化：</p>
                 <ul className="space-y-3">
                   <li className="flex gap-3">
                     <span className="text-[#007AFF] font-black">T=0</span>
-                    <span>记录初始残饵面积。</span>
+                    <span>记录初始残饵面积（总像素 4,000,000 px）。</span>
                   </li>
                   <li className="flex gap-3">
                     <span className="text-[#007AFF] font-black">T=60min</span>
-                    <span>计算快速消耗期变化率。</span>
+                    <span>计算 3600秒 内的像素消耗速度。</span>
                   </li>
                   <li className="flex gap-3">
                     <span className="text-[#007AFF] font-black">T=120min</span>
-                    <span>判定投喂效果。</span>
+                    <span>判定投喂效果与饲料利用率。</span>
                   </li>
                 </ul>
               </div>
@@ -241,9 +242,16 @@ export default function VisionModel() {
               </div>
               <div className="bg-white border border-[#E5E5E7] rounded-2xl p-6 shadow-sm">
                 <span className="text-[#86868B] text-[10px] font-black uppercase mb-1 block tracking-wider">面积占比</span>
-                <span className="text-2xl font-black font-mono text-[#1D1D1F]">
-                  {currentFeedStage ? currentFeedStage.ratio : '--'}%
-                </span>
+                <div className="flex flex-col">
+                  <span className="text-2xl font-black font-mono text-[#1D1D1F]">
+                    {currentFeedStage ? currentFeedStage.ratio : '--'}%
+                  </span>
+                  {currentFeedStage && (
+                    <span className="text-xs font-bold text-[#86868B]">
+                      {currentFeedStage.px2} px²
+                    </span>
+                  )}
+                </div>
               </div>
               <div className="bg-white border border-[#E5E5E7] rounded-2xl p-6 shadow-sm">
                 <span className="text-[#86868B] text-[10px] font-black uppercase mb-1 block tracking-wider">消耗速度</span>
