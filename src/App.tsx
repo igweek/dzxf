@@ -57,7 +57,7 @@ export default function App() {
         <div className="p-6 flex items-center justify-between">
           <div className={cn("flex items-center gap-3 transition-opacity duration-300", !isSidebarOpen && "opacity-0 invisible")}>
             <div className="w-8 h-8 rounded-lg bg-black flex items-center justify-center text-white font-bold">B</div>
-            <span className="font-semibold text-lg tracking-tight">北斗智效</span>
+            <span className="font-semibold text-lg tracking-tight">蟹路先锋</span>
           </div>
           <button 
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
