@@ -1,4 +1,4 @@
-xi/**
+/**
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -19,7 +19,8 @@ import {
   Activity,
   Menu,
   X,
-  ChevronRight
+  ChevronRight,
+  User
 } from 'lucide-react';
 import { cn } from './lib/utils';
 
@@ -56,7 +57,9 @@ export default function App() {
       >
         <div className="p-6 flex items-center justify-between">
           <div className={cn("flex items-center gap-3 transition-opacity duration-300", !isSidebarOpen && "opacity-0 invisible")}>
-            <div className="w-8 h-8 rounded-lg bg-black flex items-center justify-center text-white font-bold">B</div>
+            <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center">
+              <img src="https://cdn.nodeimage.com/i/uyPSjz93jUYp3J61120yXYGy0HZ4oe27.webp" alt="Logo" className="w-full h-full object-cover" />
+            </div>
             <span className="font-semibold text-lg tracking-tight">蟹路先锋</span>
           </div>
           <button 
@@ -102,12 +105,23 @@ export default function App() {
         </nav>
 
         <div className="p-4 border-t border-[#E5E5E7]">
-          <div className={cn("flex items-center gap-3 transition-opacity duration-300", !isSidebarOpen && "opacity-0 invisible")}>
-            <div className="w-10 h-10 rounded-full bg-gray-200" />
-            <div className="flex flex-col">
-              <span className="text-xs font-medium">管理员</span>
-              <span className="text-[10px] text-[#86868B]">在线终端: 01</span>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-400 shrink-0">
+              <User size={20} />
             </div>
+            {isSidebarOpen && (
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="flex flex-col min-w-0"
+              >
+                <span className="text-xs font-bold text-[#1D1D1F] truncate">系统管理员</span>
+                <span className="text-[10px] text-[#86868B] flex items-center gap-1">
+                  <span className="w-1 h-1 rounded-full bg-green-500" />
+                  在线终端: 01
+                </span>
+              </motion.div>
+            )}
           </div>
         </div>
       </motion.aside>
