@@ -396,7 +396,7 @@ export default function DataCleaning() {
                 )}
               >
                 {isPlaying ? <Square size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" />}
-                {isPlaying ? "停止演示" : "开始仿真测试"}
+                {isPlaying ? "停止数据清洗" : "开始数据清洗"}
               </button>
             </div>
           </div>
