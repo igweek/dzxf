@@ -54,8 +54,6 @@ export default function VisionModel() {
   }[]>([]);
   const [activityScore, setActivityScore] = useState('--');
   const [avgSpeed, setAvgSpeed] = useState('--');
-  // Add a ref to track persistent durations for the current session
-  const crabStatsRef = useRef<Record<number, { activeTime: number; lastUpdate: number }>>({});
   const rafRef = useRef<number | null>(null);
 
   // --- Feed Handlers ---
@@ -106,40 +104,13 @@ export default function VisionModel() {
     if (video && !video.paused) {
       const time = video.currentTime;
       let totalSpeed = 0;
-      let totalWeightedScore = 0;
       
       const newData = TRACK_CONFIG.map(crab => {
-        // 1. Instantaneous Speed (m/s)
-        const rawSpeed = crab.speedFactor + (Math.cos(time * 1.5 + crab.id) * 0.05) + (Math.random() * 0.02);
+        const rawSpeed = crab.speedFactor + (Math.cos(time * 1.5 + crab.id) * 0.05);
         const currentSpeed = Math.max(0, rawSpeed);
-        
-        // 2. Cumulative Distance (m)
-        const currentDist = crab.distBase + (time * crab.speedFactor * 0.4) + (Math.random() * 0.01);
-        
+        const currentDist = crab.distBase + (time * crab.speedFactor * 0.4);
         const isActive = currentSpeed > 0.06;
         
-        // 3. Activity Duration Tracking
-        if (!crabStatsRef.current[crab.id]) {
-          crabStatsRef.current[crab.id] = { activeTime: 0, lastUpdate: time };
-        }
-        const stats = crabStatsRef.current[crab.id];
-        const dt = Math.max(0, time - stats.lastUpdate);
-        if (isActive) {
-          stats.activeTime += dt;
-        }
-        stats.lastUpdate = time;
-
-        // --- New Weighted Scoring Logic ---
-        // Weights: Speed (0.6), Duration (0.3), Distance (0.1)
-        
-        // Normalize components to 0-100
-        const speedScore = Math.min(100, (currentSpeed / 0.18) * 100);
-        const durationScore = Math.min(100, (stats.activeTime / Math.max(1, time)) * 100);
-        const distScore = Math.min(100, (currentDist / 3) * 100);
-        
-        // Correct Weights: Speed (0.6), Duration (0.3), Distance (0.1)
-        const crabScore = (speedScore * 0.6) + (durationScore * 0.3) + (distScore * 0.1);
-        totalWeightedScore += crabScore;
         totalSpeed += currentSpeed;
         
         return {
@@ -152,18 +123,9 @@ export default function VisionModel() {
 
       setTrackingData(newData);
       const averageSpeed = totalSpeed / TRACK_CONFIG.length;
-      const baseWeightedScore = totalWeightedScore / TRACK_CONFIG.length;
-      
-      // Target range 50-75. Dynamic fluctuations to ensure it never stops moving.
-      const slowWave = Math.sin(time * 0.6) * 6;  // Slow rhythmic shift
-      const jitter = (Math.random() - 0.5) * 3;   // Random micro-jitter
-      
-      // Map the weighted base into a dynamic corridor
-      const dynamicBase = 54 + (baseWeightedScore * 0.12); 
-      const finalVal = Math.round(dynamicBase + slowWave + jitter);
-      const displayedScore = Math.min(78, Math.max(48, finalVal));
-      
-      setActivityScore(String(displayedScore));
+      // Refined score logic to stay within 50-90 range
+      const score = Math.min(95, Math.max(45, Math.round(averageSpeed * 350 + 40)));
+      setActivityScore(String(score));
       setAvgSpeed(averageSpeed.toFixed(3));
     }
     rafRef.current = requestAnimationFrame(updateTrackingUI);
