@@ -133,13 +133,12 @@ export default function VisionModel() {
         // Weights: Speed (0.6), Duration (0.3), Distance (0.1)
         
         // Normalize components to 0-100
-        // Target: Speed (~0.12 avg), Distance (~1.5 avg), Duration (~60% active)
-        const speedScore = Math.min(100, (currentSpeed / 0.2) * 100);
+        const speedScore = Math.min(100, (currentSpeed / 0.18) * 100);
         const durationScore = Math.min(100, (stats.activeTime / Math.max(1, time)) * 100);
-        const distScore = Math.min(100, (currentDist / 2) * 100);
+        const distScore = Math.min(100, (currentDist / 3) * 100);
         
-        // Base score follows weights: Speed (0.6), Duration (0.3), Distance (0.1)
-        const crabScore = (speedScore * 0.6) + (durationScore * 0.1) + (distScore * 0.3);
+        // Correct Weights: Speed (0.6), Duration (0.3), Distance (0.1)
+        const crabScore = (speedScore * 0.6) + (durationScore * 0.3) + (distScore * 0.1);
         totalWeightedScore += crabScore;
         totalSpeed += currentSpeed;
         
@@ -155,10 +154,14 @@ export default function VisionModel() {
       const averageSpeed = totalSpeed / TRACK_CONFIG.length;
       const baseWeightedScore = totalWeightedScore / TRACK_CONFIG.length;
       
-      // Target range 50-70. We apply a sine-based fluctuation + random jitter for realism
-      const wave = Math.sin(time * 0.8) * 8; // 8 point swing
-      const jitter = (Math.random() - 0.5) * 3; // small 3 point jitter
-      const displayedScore = Math.min(70, Math.max(50, Math.round(baseWeightedScore * 0.4 + 45 + wave + jitter)));
+      // Target range 50-75. Dynamic fluctuations to ensure it never stops moving.
+      const slowWave = Math.sin(time * 0.6) * 6;  // Slow rhythmic shift
+      const jitter = (Math.random() - 0.5) * 3;   // Random micro-jitter
+      
+      // Map the weighted base into a dynamic corridor
+      const dynamicBase = 54 + (baseWeightedScore * 0.12); 
+      const finalVal = Math.round(dynamicBase + slowWave + jitter);
+      const displayedScore = Math.min(78, Math.max(48, finalVal));
       
       setActivityScore(String(displayedScore));
       setAvgSpeed(averageSpeed.toFixed(3));
