@@ -461,7 +461,7 @@ export default function WaterQuality() {
             disabled={isCutting || isLiveSimulating}
             className="w-full bg-[#1D1D1F] text-white py-4 rounded-2xl font-bold text-sm tracking-tight flex items-center justify-center gap-2 hover:bg-black active:scale-95 disabled:bg-gray-400 transition-all shadow-lg shadow-black/10"
           >
-            <Activity size={18} /> 模型实战测试
+            <Activity size={18} /> 开始模型测试
           </button>
         </div>
       </div>
