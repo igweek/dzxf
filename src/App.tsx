@@ -57,7 +57,9 @@ export default function App() {
       >
         <div className="p-6 flex items-center justify-between">
           <div className={cn("flex items-center gap-3 transition-opacity duration-300", !isSidebarOpen && "opacity-0 invisible")}>
-            <div className="w-8 h-8 rounded-lg bg-black flex items-center justify-center text-white font-bold">B</div>
+            <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center">
+              <img src="https://cdn.nodeimage.com/i/uyPSjz93jUYp3J61120yXYGy0HZ4oe27.webp" alt="Logo" className="w-full h-full object-cover" />
+            </div>
             <span className="font-semibold text-lg tracking-tight">蟹路先锋</span>
           </div>
           <button 
