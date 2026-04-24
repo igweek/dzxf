@@ -27,11 +27,11 @@ const FEED_STAGES: FeedStage[] = [
 ];
 
 const TRACK_CONFIG = [
-  { id: 1, distBase: 0.05, speedFactor: 0.12 },
-  { id: 2, distBase: 0.12, speedFactor: 0.08 },
   { id: 3, distBase: 0.45, speedFactor: 0.25 },
   { id: 4, distBase: 0.02, speedFactor: 0.04 },
-  { id: 7, distBase: 0.82, speedFactor: 0.18 }
+  { id: 5, distBase: 0.01, speedFactor: 0.02 }, // Crab #5, very slow movement
+  { id: 1, distBase: 0.05, speedFactor: 0.12 },
+  { id: 2, distBase: 0.82, speedFactor: 0.18 }
 ];
 
 export default function VisionModel() {
@@ -122,7 +122,8 @@ export default function VisionModel() {
 
       setTrackingData(newData);
       const averageSpeed = totalSpeed / TRACK_CONFIG.length;
-      const score = Math.min(100, Math.round(averageSpeed * 500 + 30));
+      // Refined score logic to stay within 50-90 range
+      const score = Math.min(95, Math.max(45, Math.round(averageSpeed * 350 + 40)));
       setActivityScore(String(score));
       setAvgSpeed(averageSpeed.toFixed(3));
     }
@@ -266,19 +267,19 @@ export default function VisionModel() {
               </div>
             </div>
 
-            <div className="bg-[#1D1D1F] text-white rounded-3xl p-8 relative overflow-hidden shadow-2xl">
+            <div className="bg-white border border-[#E5E5E7] rounded-3xl p-8 relative overflow-hidden shadow-sm">
               <h3 className="text-[10px] font-black uppercase tracking-widest text-[#86868B] mb-6">平均实时活跃度</h3>
               <div className="flex items-end gap-3 mb-6">
                 <div className="text-7xl font-black font-mono tracking-tighter text-[#007AFF]">{activityScore}</div>
                 <div className="text-xs text-[#86868B] font-bold pb-2">/ 100 分</div>
               </div>
-              <div className="space-y-3 border-t border-white/10 pt-4">
+              <div className="space-y-3 border-t border-[#F5F5F7] pt-4">
                 <div className="flex justify-between text-xs">
                   <span className="text-[#86868B] font-bold">平均位移速度</span>
-                  <span className="font-mono text-white font-black">{avgSpeed} m/s</span>
+                  <span className="font-mono text-[#007AFF] font-black">{avgSpeed} m/s</span>
                 </div>
               </div>
-              <Activity className="absolute -bottom-8 -right-8 w-40 h-40 opacity-5" />
+              <Activity className="absolute -bottom-8 -right-8 w-40 h-40 opacity-[0.03] text-[#007AFF]" />
             </div>
           </div>
 
