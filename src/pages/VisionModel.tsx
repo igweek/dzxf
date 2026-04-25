@@ -142,7 +142,7 @@ export default function VisionModel() {
   const currentFeedStage = feedStageIndex === -1 ? null : FEED_STAGES[feedStageIndex];
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto">
+    <div className="space-y-8 max-w-7xl mx-auto p-8">
       {/* Tab Selector */}
       <div className="flex space-x-1 bg-white border border-[#E5E5E7] p-1 rounded-2xl w-fit shadow-sm relative overflow-hidden">
         <div 
