@@ -341,7 +341,7 @@ export default function SmartFeeding() {
   };
 
   return (
-    <div className="max-w-[1400px] mx-auto space-y-8 h-full">
+    <div className="max-w-[1400px] mx-auto space-y-8 h-full p-8">
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 h-full min-h-[700px]">
         {/* Left Monitor Section */}
         <div className="xl:col-span-3">
