@@ -44,7 +44,7 @@ export default function Home() {
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://cdn.nodeimage.com/i/lDk7ft669DDplmzXJWEUclFUqVZWbQsU.webp" 
+            src="https://cdn.nodeimage.com/i/sVXW1HmAe4muUMsM1zat4gze25d6YyGH.webp" 
             alt="Hero Background" 
             className="w-full h-full object-cover opacity-60"
             referrerPolicy="no-referrer"
