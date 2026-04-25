@@ -316,7 +316,7 @@ export default function DataCleaning() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto space-y-8 px-4">
+    <div className="w-full h-full p-8 space-y-8">
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {/* Left Panel */}
         <aside className="lg:col-span-1">
@@ -396,7 +396,7 @@ export default function DataCleaning() {
                 )}
               >
                 {isPlaying ? <Square size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" />}
-                {isPlaying ? "停止数据清洗" : "开始数据清洗"}
+                {isPlaying ? "停止演示" : "开始数据清洗"}
               </button>
             </div>
           </div>
