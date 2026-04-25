@@ -44,12 +44,12 @@ export default function Home() {
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://cdn.nodeimage.com/i/lDk7ft669DDplmzXJWEUclFUqVZWbQsU.webp" 
+            src="https://cdn.nodeimage.com/i/sVXW1HmAe4muUMsM1zat4gze25d6YyGH.webp" 
             alt="Hero Background" 
-            className="w-full h-full object-cover opacity-30"
+            className="w-full h-full object-cover opacity-100"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/60 to-transparent" />
         </div>
 
         <div className="relative z-10 max-w-2xl">
