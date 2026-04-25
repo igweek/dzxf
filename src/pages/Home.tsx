@@ -38,18 +38,18 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto space-y-10 pb-12">
+    <div className="max-w-7xl mx-auto space-y-10 p-8 pb-12">
       {/* Hero Section */}
-      <section className="relative overflow-hidden rounded-[2.5rem] bg-[#1D1D1F] text-white p-12 shadow-2xl min-h-[440px] flex items-center">
+      <section className="relative overflow-hidden rounded-[2.5rem] bg-white text-[#1D1D1F] p-12 shadow-sm border border-[#E5E5E7] min-h-[440px] flex items-center">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://cdn.nodeimage.com/i/sVXW1HmAe4muUMsM1zat4gze25d6YyGH.webp" 
+            src="https://cdn.nodeimage.com/i/lDk7ft669DDplmzXJWEUclFUqVZWbQsU.webp" 
             alt="Hero Background" 
-            className="w-full h-full object-cover opacity-60"
+            className="w-full h-full object-cover opacity-30"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1D1D1F] via-[#1D1D1F]/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent" />
         </div>
 
         <div className="relative z-10 max-w-2xl">
@@ -60,9 +60,9 @@ export default function Home() {
           >
             <h1 className="text-5xl font-black tracking-tight mb-6 leading-[1.1]">
               蟹路先锋 <br />
-              <span className="text-white/40">引领水产养殖 <br /> 智慧化革新。</span>
+              <span className="text-[#007AFF]">引领水产养殖 <br /> 智慧化革新。</span>
             </h1>
-            <p className="text-lg text-white/80 font-medium mb-10 max-w-md leading-relaxed">
+            <p className="text-lg text-[#86868B] font-medium mb-10 max-w-md leading-relaxed">
               集成机器视觉与复杂环境数据清洗算法，为水产养殖提供全方位的精准分析与决策支持。
             </p>
           </motion.div>
