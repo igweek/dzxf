@@ -139,7 +139,7 @@ export default function App() {
           </div>
         </header>
 
-        <section className="flex-1 overflow-y-auto p-8 relative">
+        <section className="flex-1 overflow-y-auto relative">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
