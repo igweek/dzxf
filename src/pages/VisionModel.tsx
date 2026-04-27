@@ -122,8 +122,8 @@ export default function VisionModel() {
 
       setTrackingData(newData);
       const averageSpeed = totalSpeed / TRACK_CONFIG.length;
-      // Refined score logic to stay within 50-90 range
-      const score = Math.min(95, Math.max(45, Math.round(averageSpeed * 350 + 40)));
+      // Refined score logic to stay within 60-70 range
+      const score = Math.min(75, Math.max(55, Math.round(averageSpeed * 180 + 42)));
       setActivityScore(String(score));
       setAvgSpeed(averageSpeed.toFixed(3));
     }
