@@ -21,10 +21,9 @@ interface FeedStage {
 }
 
 const FEED_STAGES: FeedStage[] = [
-  { name: 'T=0 投喂初始', ratio: '12.58', px2: '503200', speed: '--', img: '/1.jpg' },
-  { name: 'T=60 快速消耗', ratio: '10.66', px2: '426400', speed: '21.33', img: '/2.jpg' },
-  { name: 'T=120 阶段判定', ratio: '5.51', px2: '220400', speed: '57.22', img: '/3.jpg' },
-  { name: '测试结束', ratio: '0.91', px2: '36400', speed: '51.11', img: '/4.jpg' }
+  { name: 'T=0 投喂初始', ratio: '26.26', px2: '1050427', speed: '--', img: '/1.jpg' },
+  { name: 'T=60 快速消耗', ratio: '20.94', px2: '837497', speed: '59.15', img: '/2.jpg' },
+  { name: 'T=120 阶段判定', ratio: '0.69', px2: '27585', speed: '224.98', img: '/3.jpg' }
 ];
 
 const TRACK_CONFIG = [
@@ -186,15 +185,15 @@ export default function VisionModel() {
                 <ul className="space-y-3">
                   <li className="flex gap-3">
                     <span className="text-[#007AFF] font-black">T=0</span>
-                    <span>记录初始残饵面积（总像素 4,000,000 px）。</span>
+                    <span>记录投喂初始残饵（面积占比 26.26%，约 1,050,427 px²）。</span>
                   </li>
                   <li className="flex gap-3">
                     <span className="text-[#007AFF] font-black">T=60min</span>
-                    <span>计算 3600秒 内的像素消耗速度。</span>
+                    <span>对比初始面积，计算 3600秒 的平均像素消耗速度（(T0-T60)/3600）。</span>
                   </li>
                   <li className="flex gap-3">
                     <span className="text-[#007AFF] font-black">T=120min</span>
-                    <span>判定投喂效果与饲料利用率。</span>
+                    <span>根据消耗曲线与剩余面积（0.69%），判定投喂完成度与利用率。</span>
                   </li>
                 </ul>
               </div>
