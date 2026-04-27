@@ -185,15 +185,12 @@ export default function VisionModel() {
                 <ul className="space-y-3">
                   <li className="flex gap-3">
                     <span className="text-[#007AFF] font-black">T=0</span>
-                    <span>记录投喂初始残饵（面积占比 26.26%，约 1,050,427 px²）。</span>
                   </li>
                   <li className="flex gap-3">
                     <span className="text-[#007AFF] font-black">T=60min</span>
-                    <span>对比初始面积，计算 3600秒 的平均像素消耗速度（(T0-T60)/3600）。</span>
                   </li>
                   <li className="flex gap-3">
                     <span className="text-[#007AFF] font-black">T=120min</span>
-                    <span>根据消耗曲线与剩余面积（0.69%），判定投喂完成度与利用率。</span>
                   </li>
                 </ul>
               </div>
